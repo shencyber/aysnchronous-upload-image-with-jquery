@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+</head>
+<body id="vue">
+<form >
+
+	<input id="upload" type="file">
+
+</form>
+<script src="jquery.min.js"></script>
+
+<script>
+
+$(function(){
+	var formdata = new FormData();
+	var file = document.getElementById('upload');
+	file.onchange = function(){
+		console.log(file.files[0]);
+		formdata.append('file',file.files[0]);
+		$.ajax({
+			url:'test.php',
+			type:'post',
+			dataType:'json',
+			contentType:false, 
+			processData:false ,
+			data:formdata,
+			success:function(data){
+				console.log(data.file.file);
+			},
+			error:function (err) {
+				console.error(err);
+			}
+		});
+	}
+
+});
+
+
+</script>
+
+</body>
+</html>
